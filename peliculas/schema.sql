@@ -1021,3 +1021,4 @@ INSERT INTO "film" ("film_id","title","description","release_year","language_id"
 INSERT INTO "film" ("film_id","title","description","release_year","language_id","original_language_id","rental_duration","rental_rate","length","replacement_cost","rating","special_features","last_update") VALUES (999,'ZOOLANDER FICTION','A Fateful Reflection of a Waitress And a Boat who must Discover a Sumo Wrestler in Ancient China','2006',1,NULL,5,2.99,101,28.99,'R','Trailers,Deleted Scenes','2020-12-23 07:12:45');
 INSERT INTO "film" ("film_id","title","description","release_year","language_id","original_language_id","rental_duration","rental_rate","length","replacement_cost","rating","special_features","last_update") VALUES (1000,'ZORRO ARK','A Intrepid Panorama of a Mad Scientist And a Boy who must Redeem a Boy in A Monastery','2006',1,NULL,3,4.99,50,18.99,'NC-17','Trailers,Commentaries,Behind the Scenes','2020-12-23 07:12:45');
 
+END TRANSACTION;
