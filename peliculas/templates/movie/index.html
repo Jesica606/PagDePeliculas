@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %}Peliculas{% endblock %}</h1>
+{% endblock %} {% block content %} {% for film in films %}
+<article class="post">
+  <header>
+    <div>
+      <h1>{{ film['title'] }}</h1>
+    </div>
+  </header>
+  <p class="body">{{ film['description'] }}</p>
+</article>
+{% endfor %} {% endblock %}
