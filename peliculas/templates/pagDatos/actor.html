@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %}Actor{% endblock %}</h1>
+{% endblock %} {% block content %}
+<h2>{{ actor['first_name']}} {{ actor['last_name'] }}</h2>
+<h3>Peliculas:</h3>
+{% for p in peliculas %}
+<ul>
+  {{ p['title']}}
+</ul>
+{% endfor %} {% endblock %}

@@ -45,3 +45,38 @@ def index_languege():
         ' ORDER BY name ASC'
     ).fetchall()
     return render_template('movie/lenguajes.html', langueges = languages)
+
+
+@bp.route('/actor/<int:id>/')
+def index_un_actor(id):
+    db = get_db()
+    actor = db.execute(
+        """SELECT a.first_name, a.last_name FROM actor a
+            WHERE a.actor_id = ?""",
+        (id,)
+    ).fetchone()
+
+    peliculas = db.execute(
+        """SELECT f.title
+         FROM film f JOIN film_actor fa ON f.film_id = fa.film_id
+         WHERE fa.actor_id = ?""",
+        (id,)
+    ).fetchall()
+    return render_template('pagDatos/actor.html', actor = actor, peliculas = peliculas)
+
+
+@bp.route('/pelicula/<int:id>/')
+def index_una_pelicula(id):
+    db = get_db()
+    pelicula = db.execute(
+        """SELECT title FROM film f
+            WHERE f.film_id = ?""",
+        (id,)
+    ).fetchone()
+    
+    actores = db.execute(
+        """SELECT a.first_name, a.last_name FROM film_actor fa ON ac.actor_id = fa.actor_id  
+WHERE fa.film_id = ?""",
+        (id,)
+    ).fetchall()
+    return render_template('pagDatos/actor.html', pelicula = pelicula, actores = actores)
