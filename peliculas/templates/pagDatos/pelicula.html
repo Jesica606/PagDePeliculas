@@ -4,7 +4,10 @@
 <h2>{{ pelicula['title']}}</h2>
 <h3>Actores:</h3>
 {% for a in actores %}
-<ul>
+
+<a href={{url_for('movie.index_un_actor', id = a ['actor_id'])}}>
+  <ul>
   {{ a['first_name']}} {{ a['last_name'] }}
-</ul>
+</ul></a>
+
 {% endfor %} {% endblock %}

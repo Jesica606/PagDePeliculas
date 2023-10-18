@@ -10,7 +10,7 @@ bp = Blueprint('movie', __name__)
 def index_films():
     db = get_db()
     films = db.execute(
-        'SELECT title, description, rating, release_year'
+        'SELECT title, description, rating, release_year, film_id'
         ' FROM film'
         ' ORDER BY title ASC'
     ).fetchall()
@@ -20,7 +20,7 @@ def index_films():
 def index_actor():
     db = get_db()
     actors = db.execute(
-        'SELECT first_name, last_name'
+        'SELECT first_name, last_name, actor_id'
         ' FROM actor'
         ' ORDER BY first_name ASC'
     ).fetchall()
@@ -57,7 +57,7 @@ def index_un_actor(id):
     ).fetchone()
 
     peliculas = db.execute(
-        """SELECT f.title
+        """SELECT f.title, f.film_id
          FROM film f JOIN film_actor fa ON f.film_id = fa.film_id
          WHERE fa.actor_id = ?""",
         (id,)
@@ -75,8 +75,8 @@ def index_una_pelicula(id):
     ).fetchone()
     
     actores = db.execute(
-        """SELECT a.first_name, a.last_name FROM film_actor fa ON ac.actor_id = fa.actor_id  
-WHERE fa.film_id = ?""",
+        """SELECT a.first_name, a.last_name, a.actor_id FROM film_actor fa JOIN actor a ON a.actor_id = fa.actor_id  
+    WHERE fa.film_id = ?""",
         (id,)
     ).fetchall()
-    return render_template('pagDatos/actor.html', pelicula = pelicula, actores = actores)
+    return render_template('pagDatos/pelicula.html', pelicula = pelicula, actores = actores)
