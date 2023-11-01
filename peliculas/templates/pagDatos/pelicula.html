@@ -2,7 +2,7 @@
 <h1>{% block title %}Pelicula{% endblock %}</h1>
 {% endblock %} {% block content %}
 <h2>{{ pelicula['title']}}</h2>
-<h3>Actores:</h3>
+<h3>Actores / Reparto :</h3>
 {% for a in actores %}
 
 <a href={{url_for('movie.index_un_actor', id = a ['actor_id'])}}>
