@@ -9,21 +9,23 @@ bp = Blueprint('movie', __name__)
 @bp.route('/peliculas')
 def index_films():
     db = get_db()
-    films = db.execute(
+    db.execute(
         'SELECT title, description, rating, release_year, film_id'
         ' FROM film'
         ' ORDER BY title ASC'
-    ).fetchall()
+    )
+    films = db.fetchall()
     return render_template('movie/peliculas.html', films=films)
 
 @bp.route('/api/peliculas')
 def index_films_api():
     db = get_db()
-    films = db.execute(
+    db.execute(
         'SELECT title, description, rating, release_year, film_id'
         ' FROM film'
         ' ORDER BY title ASC'
-    ).fetchall()
+    )
+    films = db.fetchall()
 
     for film in films:
         film["url"] = url_for("movie.index_una_pelicula_api", id=film["film_id"], _external=True)
@@ -36,21 +38,23 @@ def index_films_api():
 @bp.route('/actores')
 def index_actor():
     db = get_db()
-    actors = db.execute(
+    db.execute(
         'SELECT first_name, last_name, actor_id'
         ' FROM actor'
         ' ORDER BY first_name ASC'
-    ).fetchall()
+    )
+    actors = db.fetchall()
     return render_template('movie/actores.html', actors = actors)
 
 @bp.route('/api/actores')
 def index_actor_api():
     db = get_db()
-    actors = db.execute(
+    db.execute(
         'SELECT first_name, last_name, actor_id'
         ' FROM actor'
         ' ORDER BY first_name ASC'
-    ).fetchall()
+    )
+    actors = db.fetchall()
 
     for actor in actors:
         actor["url"] = url_for("movie.index_un_actor_api", id=actor["actor_id"], _external=True)
@@ -63,21 +67,23 @@ def index_actor_api():
 @bp.route('/categorias')
 def index_category():
     db = get_db()
-    categories = db.execute(
+    db.execute(
         'SELECT name'
         ' FROM category'
         ' ORDER BY name ASC'
-    ).fetchall()
+    )
+    categories = db.fetchall()
     return render_template('movie/categorias.html', categories = categories)
 
 @bp.route('/api/categorias')
 def index_category_api():
     db = get_db()
-    categories = db.execute(
+    db.execute(
         'SELECT name'
         ' FROM category'
         ' ORDER BY name ASC'
-    ).fetchall()
+    )
+    categories = db.fetchall()
     return jsonify(categories = categories)
 
 
@@ -86,23 +92,24 @@ def index_category_api():
 @bp.route('/lenguajes')
 def index_languege():
     db = get_db()
-    languages = db.execute(
+    db.execute(
         'SELECT name'
         ' FROM language'
         ' ORDER BY name ASC'
-    ).fetchall()
+    )
+    languages = db.fetchall()
     return render_template('movie/lenguajes.html', langueges = languages)
 
 @bp.route('/api/lenguajes')
 def index_languege_api():
     db = get_db()
-    languages = db.execute(
+    db.execute(
         'SELECT name'
         ' FROM language'
         ' ORDER BY name ASC'
-    ).fetchall()
+    )
+    languages = db.fetchall()
     return jsonify(langueges = languages)
-
 
 
 
