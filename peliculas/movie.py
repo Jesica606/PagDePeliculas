@@ -116,35 +116,39 @@ def index_languege_api():
 @bp.route('/actor/<int:id>/')
 def index_un_actor(id):
     db = get_db()
-    actor = db.execute(
+    db.execute(
         """SELECT a.first_name, a.last_name FROM actor a
-            WHERE a.actor_id = ?""",
+            WHERE a.actor_id = %s""",
         (id,)
-    ).fetchone()
+    )
+    actor = db.fetchone()
 
-    peliculas = db.execute(
+    db.execute(
         """SELECT f.title, f.film_id
          FROM film f JOIN film_actor fa ON f.film_id = fa.film_id
-         WHERE fa.actor_id = ?""",
+         WHERE fa.actor_id = %s""",
         (id,)
-    ).fetchall()
+    )
+    peliculas = db.fetchall()
     return render_template('pagDatos/actor.html', actor = actor, peliculas = peliculas)
 
 @bp.route('/api/actor/<int:id>/')
 def index_un_actor_api(id):
     db = get_db()
-    actor = db.execute(
+    db.execute(
         """SELECT a.first_name, a.last_name FROM actor a
-            WHERE a.actor_id = ?""",
+            WHERE a.actor_id = %s""",
         (id,)
-    ).fetchone()
+    )
+    actor = db.fetchone()
 
-    peliculas = db.execute(
+    db.execute(
         """SELECT f.title, f.film_id
          FROM film f JOIN film_actor fa ON f.film_id = fa.film_id
-         WHERE fa.actor_id = ?""",
+         WHERE fa.actor_id = %s""",
         (id,)
-    ).fetchall()
+    )
+    peliculas = db.fetchall()
     return jsonify(actor = actor, peliculas = peliculas)
 
 
@@ -155,31 +159,35 @@ def index_un_actor_api(id):
 @bp.route('/pelicula/<int:id>/')
 def index_una_pelicula(id):
     db = get_db()
-    pelicula = db.execute(
+    db.execute(
         """SELECT title FROM film f
-            WHERE f.film_id = ?""",
+            WHERE f.film_id = %s """,
         (id,)
-    ).fetchone()
+    )
+    pelicula = db.fetchone()
     
-    actores = db.execute(
+    db.execute(
         """SELECT a.first_name, a.last_name, a.actor_id FROM film_actor fa JOIN actor a ON a.actor_id = fa.actor_id  
-    WHERE fa.film_id = ?""",
+    WHERE fa.film_id = %s """,
         (id,)
-    ).fetchall()
+    )
+    actores = db.fetchall()
     return render_template('pagDatos/pelicula.html', pelicula = pelicula, actores = actores)
 
 @bp.route('/api/pelicula/<int:id>/')
 def index_una_pelicula_api(id):
     db = get_db()
-    pelicula = db.execute(
+    db.execute(
         """SELECT title FROM film f
-            WHERE f.film_id = ?""",
+            WHERE f.film_id = %s """,
         (id,)
-    ).fetchone()
+    )
+    pelicula = db.fetchone()
     
-    actores = db.execute(
+    db.execute(
         """SELECT a.first_name, a.last_name, a.actor_id FROM film_actor fa JOIN actor a ON a.actor_id = fa.actor_id  
-    WHERE fa.film_id = ?""",
+    WHERE fa.film_id = %s """,
         (id,)
-    ).fetchall()
+    )
+    actores = db.fetchall()
     return jsonify(pelicula = pelicula, actores = actores)
